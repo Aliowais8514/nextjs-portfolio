@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
+import my1 from "./my1.png";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}> 
+        <header className="text-white body-font bg-gradient-to-r from-slate-600">
+          <div className="container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center">
+            <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+              <div className="avatar">
+                <div className="ring-primary ring-offset-base-100 w-20 rounded-full">
+                  <Image src={"/Images/my1.png"} alt="me" height={100} width={100} />
+                </div>
+              </div>
+              <h1 className="ml-3 text-4xl font-serif font-bold text-white animate-pulse hover:uppercase">
+                <span className="text-5xl hover:text-black">PortFolio</span>
+              </h1>
+            </a>
+            <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center text-2xl gap-7 font-sans font-semibold">
+              {["Home", "About", "Skills", "Projects", "Services", "Contact"].map((item) => (
+                <Link key={item} href={`/${item}`} className="mr-5 transform hover:scale-110 motion-reduce:transform-none hover:text-yellow-400 hover:uppercase transition duration-300">
+                  {item}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
